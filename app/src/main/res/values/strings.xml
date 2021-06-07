@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Esame2</string>
+    <string name="On">ON</string>
+    <string name="Off">OFF</string>
 </resources>

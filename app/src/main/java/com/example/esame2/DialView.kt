@@ -31,7 +31,7 @@ class DialView: View {
     private fun init(attrs: AttributeSet?){
         //get the custom attributes (btnOnColor and btnOffColor) if available
         if(attrs != null) {
-            val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.DialView, 0, 0)
+            val typedArray = context.obtainStyledAttributes(attrs, R.styleable.DialView, 0, 0)
 
             //Set the fan on and fan off colors from the attribute values
             mRectOnColor = typedArray.getColor(R.styleable.DialView_btnOnColor, mRectOnColor);
@@ -40,20 +40,20 @@ class DialView: View {
         }
 
         //paint per la scritta ON e OFF
-        val textColor = getResources().getColor(R.color.orange)
-        mTextPaint.setColor(textColor)
-        mTextPaint.setTextAlign(Paint.Align.CENTER)
+        val textColor = resources.getColor(R.color.orange)
+        mTextPaint.color = textColor
+        mTextPaint.textAlign = Paint.Align.CENTER
         mTextPaint.style = Paint.Style.FILL_AND_STROKE
 
         //paint per disegnare rettangolo base
         mDialPaint.color=mRectOffColor
 
         //paint per disegnare cerchio OFF e linea ON
-        mOffOnTextPaint.setColor(Color.WHITE)
+        mOffOnTextPaint.color = Color.WHITE
 
         //paint per la linea divisoria
-        val lineColor = getResources().getColor(R.color.darkgrey)
-        mLinePaint.setColor(lineColor)
+        val lineColor = resources.getColor(R.color.darkgrey)
+        mLinePaint.color = lineColor
         mLinePaint.style = Paint.Style.STROKE
         mLinePaint.strokeWidth = 25f
 
@@ -71,6 +71,10 @@ class DialView: View {
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+
+        //stringhe per ON e OFF stringhe
+        val On = resources.getString(R.string.On)
+        val Off = resources.getString(R.string.Off)
 
         //attributi per corretto ridmimensionamento
         mOffOnTextPaint.textSize = height/5.toFloat()
@@ -116,9 +120,9 @@ class DialView: View {
 
         //disegno scritta sulla bitmpa
         if (mActiveSelection >= 1) {
-            canvas.drawText("ON", OnOffX.toFloat(), OnOffY.toFloat(), mTextPaint)
+            canvas.drawText(On, OnOffX.toFloat(), OnOffY.toFloat(), mTextPaint)
         } else {
-            canvas.drawText("OFF", OnOffX.toFloat(), OnOffY.toFloat(), mTextPaint)
+            canvas.drawText(Off, OnOffX.toFloat(), OnOffY.toFloat(), mTextPaint)
         }
 
     }
